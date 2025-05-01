@@ -29,13 +29,13 @@ All in a **lightweight**, **offline-compatible**, and **mobile-first** solution 
 
 ## 🧑‍💻 Tech Stack
 
-| Layer        | Stack                     |
-|--------------|---------------------------|
-| Frontend     | HTML, CSS (Tailwind), JS  |
-| Backend      | Node.js / Python (TBD)    |
-| ML Model     | TensorFlow Lite (TFLite)  |
-| SMS Support  | Twilio / Africa’s Talking |
-| Hosting      | GitHub Pages / Netlify    |
+| Layer        | Stack                              |
+|--------------|------------------------------------|
+| Frontend     | HTML, CSS (Tailwind), JS(React)    |
+| Backend      | Node.js / Python (TBD)             |
+| ML Model     | TensorFlow Lite (TFLite)           |
+| SMS Support  | Twilio / Africa’s Talking          |
+| Hosting      | GitHub Pages / Netlify             |
 
 ---
 
