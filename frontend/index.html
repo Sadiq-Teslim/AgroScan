@@ -7,6 +7,7 @@
   
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <script src="./app.js"></script> -->
 </head>
 
 <!-- Overlay -->
@@ -25,7 +26,7 @@
         Continue as Guest
       </button>
       <button 
-        id="signupBtn" 
+        id="signInBtn" 
         class="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-md transition"
       >
         Sign Up
@@ -51,7 +52,6 @@
 
   </div>
 </div>
-
 <!-- Overlay1 End -->
 
 
@@ -70,10 +70,9 @@
     <p class="text-sm text-gray-500">Made by AgroScan Team</p>
   </footer>
 </body>
-
 <script>
-  // Trigger modal when "Try It Now" is clicked
-  document.getElementById('tryNowBtn').addEventListener('click', () => {
+    // Trigger modal when "Try It Now" is clicked
+    document.getElementById('tryNowBtn').addEventListener('click', () => {
     document.getElementById('authModal').classList.remove('hidden');
   });
 
@@ -84,7 +83,7 @@
   });
 
   // Redirect to sign up
-  document.getElementById('signupBtn').addEventListener('click', () => {
+  document.getElementById('signInBtn').addEventListener('click', () => {
     window.location.href = 'signup.html'; // change to your actual signup page
   });
   
@@ -107,6 +106,15 @@ function redirectToSignUp() {
   function closeSMSModal() {
     document.getElementById('smsModal').classList.add('hidden');
   }
-</script>
 
+  // document.getElementById("guestBtn").addEventListener("click", function () {
+  //   localStorage.setItem("isGuest", "true");
+  //   // Open the next modal OR redirect after user confirms
+  // });
+
+  // document.getElementById("signInBtn").addEventListener("click", function () {
+  //   localStorage.setItem("isGuest", "false");
+  //   // Redirect to sign in page
+  // });
+</script>
 </html>
