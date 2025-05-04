@@ -1,45 +1,66 @@
-  // Trigger modal when "Try It Now" is clicked
-  document.getElementById('tryNowBtn').addEventListener('click', () => {
-    document.getElementById('authModal').classList.remove('hidden');
-  });
+const toggleBtn = document.getElementById("toggleBtn");
+const sidebar = document.getElementById("sidebar");
+const closeBtn = document.getElementById("closeSidebar");
 
-  // Continue as guest
-  document.getElementById('guestBtn').addEventListener('click', () => {
-    document.getElementById('authModal').classList.add('hidden');
-    // window.location.href = 'diagnosis.html'; // or wherever you want to send them
-  });
+toggleBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("-translate-x-full");
+});
 
-  // Redirect to sign up
-  document.getElementById('signupBtn').addEventListener('click', () => {
-    window.location.href = 'signup.html'; // change to your actual signup page
-  });
-  
-  function redirectToDiagnosis() {
-  // Close the SMS modal
-  document.getElementById('smsModal').classList.add('hidden');
-  // Redirect
-  window.location.href = 'diagnosis.html';
-}
-function redirectToSignUp() {
-  // Close the SMS modal
-  document.getElementById('smsModal').classList.add('hidden');
-  // Redirect
-  window.location.href = 'signup.html';
-}
-  function showSMSModal() {
-    document.getElementById('smsModal').classList.remove('hidden');
-  }
+closeBtn.addEventListener("click", () => {
+  sidebar.classList.add("-translate-x-full");
+});
+const diagnosisTitle = document.getElementById("diagnosisTitle");
+const diagnosisDate = document.getElementById("diagnosisDate");
+const diagnosisDescription = document.getElementById(
+  "diagnosisDescription"
+);
+const diagnosisDetails = document.getElementById("diagnosisDetails");
 
-  function closeSMSModal() {
-    document.getElementById('smsModal').classList.add('hidden');
-  }
+const diagnosisDataArray = [
+{
+  title: "Tomato Leaf Spot",
+  date: "April 20, 2025",
+  summary:
+    "Detected early symptoms of fungal infection. Recommended copper-based treatment.",
+  id: 1,
+},
+{
+  title: "Cassava Mosaic Virus",
+  date: "April 18, 2025",
+  summary:
+    "Viral infection detected. Isolate affected crops to reduce spread.",
+  id: 2,
+},
+{
+  title: "Potato Late Blight",
+  date: "April 15, 2025",
+  summary:
+    "High confidence in late blight based on leaf pattern recognition.",
+  id: 3,
+},
+];
 
-  document.getElementById("guestBtn").addEventListener("click", function () {
-    localStorage.setItem("isGuest", "true");
-    // Open the next modal OR redirect after user confirms
-  });
+const diagnosisCardsContainer = document.querySelector(".diagnosis-cards");
+diagnosisCardsContainer.innerHTML = ""; // Clear skeleton loaders
 
-  document.getElementById("signInBtn").addEventListener("click", function () {
-    localStorage.setItem("isGuest", "false");
-    // Redirect to sign in page
-  });
+diagnosisDataArray.forEach((diagnosis) => {
+const card = document.createElement("div");
+card.className =
+  "bg-white shadow-md rounded-lg p-4 mb-4 border-l-4 border-green-500";
+
+card.innerHTML = `
+  <div class="flex justify-between items-center mb-2">
+    <h3 class="text-lg font-semibold text-gray-800">${diagnosis.title}</h3>
+    <span class="text-sm text-gray-500">${diagnosis.date}</span>
+  </div>
+  <p class="text-gray-600 text-sm mb-2">${diagnosis.summary}</p>
+  <a
+    href="diagnosis-detail.html?id=${diagnosis.id}"
+    class="text-green-700 text-sm hover:underline font-bold"
+  >
+    View Details
+  </a>
+`;
+
+diagnosisCardsContainer.appendChild(card);
+});
