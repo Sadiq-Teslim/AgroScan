@@ -3,7 +3,9 @@ const users = [
   { name: "Amina Yusuf", email: "amina@gmail.com", password: "amina456" },
   { name: "Chidi Okoro", email: "chidi@agroscan.com", password: "chidi789" },
   { name: "Fatima Bello", email: "fatima@agroscan.com", password: "fatima321" },
-  { name: "Ibrahim Musa", email: "ibrahim@agroscan.com", password: "ibrahim654" }
+  { name: "Ibrahim Musa", email: "ibrahim@agroscan.com", password: "ibrahim654" },
+  { name: "Sadiq Teslim", email: "sadiqadetola08@gmail.com", password: "Bamidele@08" },
+
 ];
 function login(event) {
   event.preventDefault(); // Prevent form submission
