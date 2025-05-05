@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgroScan | Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-green-50 text-gray-800 min-h-screen" id="mainContent">
+    <!-- Sidebar -->
+    <aside
+      id="sidebar"
+      class="w-64 bg-gradient-to-b from-green-700 to-green-900 text-white min-h-screen p-6 space-y-8 transition-transform duration-300 transform -translate-x-full md:block fixed md:relative z-40 fixed top-0 left-0 w-64 h-full mt-16 md:rounded-tr-xl md:shadow-lg"
+    >
+      <!-- Close Button (visible on mobile only) -->
+      <button
+        id="closeSidebar"
+        class="md:hidden text-green-300 hover:bg-green-500 text-xl absolute top-4 right-4 focus:outline-none shadow-md rounded-full p-2 transition duration-300"
+      >
+        ✖
+      </button>
+
+      <div class="text-2xl font-bold">🌿 AgroScan</div>
+      <nav class="space-y-4 mt-6">
+        <a
+          href="diagnosis.html"
+          class="flex items-center gap-3 bg-green-800/40 hover:bg-green-800 transition px-4 py-3 rounded-xl shadow-md text-white hover:text-yellow-500"
+        >
+          <i data-lucide="microscope" class="w-5 h-5"></i>
+          <span>New Diagnosis</span>
+        </a>
+
+        <a
+          href="history.html"
+          class="flex items-center gap-3 bg-green-800/20 hover:bg-green-800 transition px-4 py-3 rounded-xl shadow-md text-white hover:text-yellow-500"
+        >
+          <i data-lucide="folder-search" class="w-5 h-5"></i>
+          <span>Past Diagnoses</span>
+        </a>
+
+        <a
+          href="profile.html"
+          class="flex items-center gap-3 bg-green-800/40 hover:bg-green-800 transition px-4 py-3 rounded-xl shadow-md text-white hover:text-yellow-500"
+        >
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span>Profile</span>
+        </a>
+
+        <a
+          href="settings.html"
+          class="flex items-center gap-3 bg-green-800/40 hover:bg-green-800 transition px-4 py-3 rounded-xl shadow-md text-white hover:text-yellow-500"
+        >
+          <i data-lucide="settings" class="w-5 h-5"></i>
+          <span>Settings</span>
+        </a>
+
+        <a
+          href="index.html"
+          class="flex items-center gap-3 bg-green-800/40 hover:bg-green-800 transition px-4 py-3 rounded-xl shadow-md hover:text-yellow-500"
+        >
+          <i data-lucide="log-out" class="w-5 h-5"></i>
+          <span>Logout</span>
+        </a>
+
+        <div
+          class="mt-auto text-sm text-green-100 border-t border-green-600 pt-4"
+        >
+          🌿 Connected. Ready to scan.
+        </div>
+      </nav>
+    </aside>
+
+    <!-- General Navbar  -->
+    <nav
+      id="guestNavbar"
+      class="w-full flex justify-center items-center bg-white px-6 py-4 shadow-md top-0 z-50 text-center"
+    >
+      <div class="flex items-center">
+        <span class="text-2xl">🌿</span>
+        <h1 class="text-xl font-bold text-green-700 text-center">AgroScan</h1>
+      </div>
+    </nav>
+
+    <div class="flex-1 p-6 md:p-10 ml-0 md:ml-64 w-full md:mt-24">
+      <!-- Toggle Button -->
+      <button
+        id="toggleBtn"
+        class="md:hidden mb-6 bg-green-700 text-white px-4 py-2 rounded-md shadow hover:bg-green-800"
+      >
+        ☰ Menu
+      </button>
+    </div>
+    <main class="flex-grow">
+      <!-- Profile Section -->
+      <section class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md mt-6">
+        <div class="flex flex-col md:flex-row items-center gap-6">
+          <!-- Profile Banner -->
+          <div
+            class="w-full h-24 rounded-xl bg-gradient-to-r from-green-500 via-lime-400 to-green-600 mb-6"
+          ></div>
+
+          <!-- Avatar -->
+          <div
+            class="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center text-3xl font-bold text-green-700 shadow-inner -mt-20 border-4 border-white"
+          >
+            👤
+          </div>
+
+          <!-- User Info -->
+          <div class="flex-1 text-center">
+            <h2 class="text-2xl font-bold text-green-700 mb-1">John Doe</h2>
+            <p class="text-gray-600">AgroScan Farmer</p>
+            <p
+              class="text-sm text-gray-500 mt-1 flex items-center gap-2 justify-center"
+            >
+              <i data-lucide="phone" class="w-4 h-4 text-green-600"></i>
+              <span>+234 701 234 5678</span>
+            </p>
+            <p
+              class="text-sm text-gray-500 flex items-center gap-2 justify-center"
+            >
+              <i data-lucide="mail" class="w-4 h-4 text-red-600"></i>
+              <span>john@example.com</span>
+            </p>
+            <p
+              class="text-sm text-gray-800 flex items-center justify-center gap-2"
+            >
+              <i data-lucide="map-pin" class="w-4 h-4 text-yellow-600"></i>
+              <span>Kano</span>
+            </p>
+          </div>
+
+          <!-- Edit Button -->
+          <button
+            class="mt-4 md:mt-0 bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700 transition"
+          >
+            Edit Profile
+          </button>
+        </div>
+      </section>
+
+      <!-- Activity Section -->
+      <section class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md mt-6">
+        <h3 class="text-xl font-semibold text-green-700 mb-4">
+          Recent Activity
+        </h3>
+
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <i data-lucide="activity" class="w-5 h-5 text-green-600"></i>
+            <span class="text-gray-700"
+              >Diagnosed <strong>Tomato Leaf Spot</strong> – April 20,
+              2025</span
+            >
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="activity" class="w-5 h-5 text-green-600"></i>
+            <span class="text-gray-700"
+              >Diagnosed <strong>Cassava Mosaic Virus</strong> – April 18,
+              2025</span
+            >
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="activity" class="w-5 h-5 text-green-600"></i>
+            <span class="text-gray-700"
+              >Updated profile info – April 15, 2025</span
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Footer  -->
+    <footer class="bottom-0 w-full bg-white shadow-md mt-6 left-0 md:ml-64">
+      <div class="max-w-screen-xl mx-auto p-6 text-center rounded-t-xl left-0">
+        <p class="text-gray-600 text-sm font-semibold">
+          &copy; 2025 AgroScan. All rights reserved.
+        </p>
+        <p class="text-gray-600 text-sm">
+          <a href="privacy.html" class="text-green-700 hover:underline"
+            >Privacy Policy</a
+          >
+          |
+          <a href="terms.html" class="text-green-700 hover:underline"
+            >Terms of Service</a
+          >
+        </p>
+      </div>
+    </footer>
+    <script src="./profile.js"></script>
+  </body>
+</html>

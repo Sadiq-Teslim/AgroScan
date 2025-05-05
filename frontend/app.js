@@ -1,5 +1,11 @@
-  // Trigger modal when "Try It Now" is clicked
-  document.getElementById('tryNowBtn').addEventListener('click', () => {
+function initialLogin() {
+  const loginBtn = document.getElementById('loginBtn')
+  window.location.href = 'login.html';
+}
+
+// Function to check if the user is a guest
+    // Trigger modal when "Try It Now" is clicked
+    document.getElementById('tryNowBtn').addEventListener('click', () => {
     document.getElementById('authModal').classList.remove('hidden');
   });
 
@@ -10,7 +16,7 @@
   });
 
   // Redirect to sign up
-  document.getElementById('signupBtn').addEventListener('click', () => {
+  document.getElementById('signInBtn').addEventListener('click', () => {
     window.location.href = 'signup.html'; // change to your actual signup page
   });
   
@@ -19,6 +25,7 @@
   document.getElementById('smsModal').classList.add('hidden');
   // Redirect
   window.location.href = 'diagnosis.html';
+  localStorage.setItem('isGuest', 'true')
 }
 function redirectToSignUp() {
   // Close the SMS modal
@@ -34,12 +41,12 @@ function redirectToSignUp() {
     document.getElementById('smsModal').classList.add('hidden');
   }
 
-  document.getElementById("guestBtn").addEventListener("click", function () {
-    localStorage.setItem("isGuest", "true");
-    // Open the next modal OR redirect after user confirms
-  });
+  // document.getElementById("guestBtn").addEventListener("click", function () {
+  //   localStorage.setItem("isGuest", "true");
+  //   // Open the next modal OR redirect after user confirms
+  // });
 
-  document.getElementById("signInBtn").addEventListener("click", function () {
-    localStorage.setItem("isGuest", "false");
-    // Redirect to sign in page
-  });
+  // document.getElementById("signInBtn").addEventListener("click", function () {
+  //   localStorage.setItem("isGuest", "false");
+  //   // Redirect to sign in page
+  // });
