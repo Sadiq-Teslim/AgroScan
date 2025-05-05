@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AgroScan | Login</title>
+    <link rel="shortcut icon" href="images/agric-logo.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-green-50 flex items-center justify-center min-h-screen">
@@ -12,7 +13,8 @@
         Welcome Back to AgroScan
       </h2>
 
-      <form id="loginForm" class="space-y-4">
+      <form id="loginForm" class="space-y-4" onsubmit="login(event)">
+        
         <div>
           <label class="block text-gray-600 text-sm mb-1" for="email"
             >Email</label
@@ -21,6 +23,18 @@
             id="email"
             type="email"
             required
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-gray-600 text-sm mb-1" for="number"
+            >Phone Number</label
+          >
+          <input
+            id="number"
+            type="text"
+            placeholder="Optional"
             class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
@@ -36,7 +50,7 @@
             class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
-
+        <div id="login-status" class="text-center text-sm mb-4"></div>
         <button
           type="submit"
           class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition"
@@ -57,5 +71,6 @@
         <a href="signup.html" class="text-green-600 hover:underline">Sign Up</a>
       </div>
     </div>
+    <script src="./login.js"></script>
   </body>
 </html>
