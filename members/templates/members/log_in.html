@@ -1,0 +1,14 @@
+{% extends 'members/base.html' %}
+{% load static %}
+{% block content %}
+<form id="login-form">
+    {% csrf_token %}
+    <h2>Log In</h2>
+    <input type="text" id="login-username" placeholder="Username" required />
+    <input type="password" id="login-password" placeholder="Password" required />
+    <button type="submit">Log In</button>
+    <p id="login-status"></p>
+</form>
+
+<script src="{% static 'JS/login.js' %}"></script>
+{% endblock %}

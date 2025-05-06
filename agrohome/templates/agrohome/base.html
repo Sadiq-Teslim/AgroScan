@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroScan - Crop Diagnosis</title>
+</head>
+<body>
+    <div id="main-routes"
+        data-login-url="{% url 'log_in' %}"
+        data-signup-url="{% url 'sign_up' %}"
+        data-diagnosis-url="{% url 'run_diagnosis' %}"
+    >
+    </div>
+    {% block content %}
+    {% endblock %}
+    <script src="{% static 'JS/main.js' %}"></script>
+</body>
+</html>

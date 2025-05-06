@@ -1,0 +1,11 @@
+{% extends 'submissions/base.html' %}
+{% load static %}
+{% block content %}
+<form id="diagnosisForm" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image" required>
+    <input type="text" name="notes" placeholder="Optional notes">
+    <button type="submit">Submit</button>
+</form>
+<script src="{% static 'JS/diagnosis.js' %}"></script>
+{% endblock %}

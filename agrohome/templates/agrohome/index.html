@@ -1,0 +1,9 @@
+{% extends 'agrohome/base.html' %}
+{% load static %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Log Out</a>
+    {% else %}
+        <p>You're not logged in</p>
+    {% endif %}
+{% endblock %}
