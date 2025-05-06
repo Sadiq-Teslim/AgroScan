@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgroScan</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+
+  <!-- Overlay -->
+  <div
+    id="authModal"
+    class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden"
+  >
+    <!-- Modal Box -->
+    <div class="bg-white rounded-xl shadow-lg p-6 w-80 text-center">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800">
+        Welcome to AgroScan 🌱
+      </h2>
+      <p class="text-sm text-gray-600 mb-6">
+        Would you like to sign up or continue as a guest?
+      </p>
+
+      <div class="flex flex-col space-y-3">
+        <button
+          id="guestBtn"
+          class="bg-green-500 hover:bg-green-600 text-white py-2 rounded-md transition"
+          onclick="showSMSModal()"
+        >
+          Continue as Guest
+        </button>
+        <button
+          id="signInBtn"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-md transition"
+        >
+          Sign Up
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div
+    id="smsModal"
+    class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden"
+  >
+    <!-- Modal Box -->
+    <div class="bg-white rounded-xl shadow-lg p-6 w-80 text-center relative">
+      <!-- Close Button -->
+      <button
+        onclick="closeSMSModal()"
+        class="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-xl font-bold"
+      >
+        &times;
+      </button>
+
+      <h2 class="text-lg font-semibold mb-4 text-gray-800">
+        Do you know you can use AgroScan through SMS? 🌱
+      </h2>
+      <p class="text-sm text-gray-600 mb-6">
+        We understand the fact that some farmers don't have access to internet
+        connection. Hence, you can use the services of AgroScan through SMS.
+        Just send a picture to 0000 to get your diagnosis started!
+      </p>
+      <button
+        onclick="redirectToDiagnosis()"
+        class="mt-4 bg-green-600 text-white px-4 py-2 rounded"
+      >
+        Proceed
+      </button>
+    </div>
+  </div>
+  <!-- Overlay1 End -->
+
+  <body
+    class="bg-green-50 text-gray-900 min-h-screen flex flex-col items-center justify-center"
+  >
+    <!-- General Navbar -->
+    <nav
+      id="guestNavbar"
+      class="w-full flex fixed items-center justify-center bg-white px-6 py-4 shadow-md top-0 z-50"
+    >
+      <!-- Center: Logo -->
+      <div class="flex items-center">
+        <div class="flex items-center">
+          <span class="text-2xl">🌿</span>
+          <h1 class="text-xl font-bold text-green-700 ml-2">AgroScan</h1>
+        </div>
+      </div>
+
+      <!-- Right: Placeholder (optional for spacing) -->
+      <!-- <div class="flex-1"></div> -->
+    </nav>
+    <div class="text-center mt-24">
+      <h1 class="text-3xl font-bold text-green-700 mb-4">
+        🌾 Welcome to AgroScan
+      </h1>
+      <p class="text-lg text-gray-600">
+        Smart crop diagnosis. Even without internet.
+      </p>
+      <div class="flex-grow">
+        <button
+          class="mt-6 px-6 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-yellow-600 transition duration-300 mr-2"
+          id="loginBtn"
+          onclick="initialLogin()"
+        >
+          Login
+        </button>
+        <button
+          onclick="document.getElementById('authModal').classList.remove('hidden')"
+          class="bg-yellow-600 text-white px-6 py-3 rounded-xl hover:bg-green-600 transition duration-300 ml-2 font-semibold"
+          id="tryNowBtn"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+    <div class="mt-12 max-w-4xl w-full px-6 text-center">
+      <h2 class="text-3xl font-bold text-green-700 mb-4">What is AgroScan?</h2>
+      <p class="text-gray-700 text-lg mb-8">
+        AgroScan is your intelligent crop health assistant that helps farmers
+        diagnose plant diseases — even without internet access. Whether you're
+        online or offline, simply snap a photo or send an SMS to get started.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-green-700 mb-4">
+        Core Features 🌟
+      </h2>
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left hover:scale-170 transition-transform"
+      >
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="font-bold text-lg mb-2">📷 Smart Diagnosis</h3>
+          <p class="text-gray-600 text-sm">
+            Upload or send a photo of your plant — we’ll tell you what’s wrong
+            and how to fix it.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="font-bold text-lg mb-2">📶 Offline Support</h3>
+          <p class="text-gray-600 text-sm">
+            No internet? No problem. AgroScan works via SMS for rural
+            communities.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="font-bold text-lg mb-2">⚡ Fast & Lightweight</h3>
+          <p class="text-gray-600 text-sm">
+            Designed for speed and simplicity, even on low-end devices or 2G
+            networks.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10">
+        <button
+          onclick="document.getElementById('authModal').classList.remove('hidden')"
+          class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300"
+          id="tryNowBtn"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+
+    <footer class="text-center mb-4">
+      <p class="mt-8 text-sm text-gray-600">
+        © 2025 AgroScan. All rights reserved.
+      </p>
+      <p class="text-sm text-gray-500">Made by AgroScan Team</p>
+    </footer>
+    <script src="./app.js"></script>
+  </body>
+</html>
