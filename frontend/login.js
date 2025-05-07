@@ -11,7 +11,6 @@ function login(event) {
   event.preventDefault(); // Prevent form submission
   const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value.trim();
-  const number = document.getElementById("number").value.trim();
   const user = users.find(u => u.email.toLowerCase() === email && u.password === password);
 
   const status = document.getElementById("login-status");
