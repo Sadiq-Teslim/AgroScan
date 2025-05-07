@@ -3,6 +3,8 @@ const toggleBtn = document.getElementById('toggleBtn')
 const sidebar = document.getElementById('sidebar')
 const closeBtn = document.getElementById('closeSidebar')
 
+const mainContentWrapper = document.getElementById('mainContentWrapper');
+
 toggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('-translate-x-full')
   mainContentWrapper.classList.add('flex', 'flex-1')

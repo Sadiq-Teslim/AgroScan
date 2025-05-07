@@ -30,7 +30,7 @@
     }
 
     // Add the new user to the array
-    const newUser = { name, email, password };
+    const newUser = { name, email, password: password1 };
     users.push(newUser);
 
     // Save updated user array to localStorage
