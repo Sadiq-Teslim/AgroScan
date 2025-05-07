@@ -30,3 +30,7 @@ function login(event) {
     status.className = "text-red-600";
   }
 }
+lucide.createIcons()
+function back() {
+  window.location.href = "index.html";
+}
