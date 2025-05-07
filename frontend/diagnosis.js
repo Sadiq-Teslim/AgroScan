@@ -3,8 +3,11 @@ const toggleBtn = document.getElementById('toggleBtn')
 const sidebar = document.getElementById('sidebar')
 const closeBtn = document.getElementById('closeSidebar')
 
+const mainContentWrapper = document.getElementById('mainContentWrapper');
+
 toggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('-translate-x-full')
+  mainContentWrapper.classList.add('flex', 'flex-1')
 })
 
 closeBtn.addEventListener('click', () => {
@@ -19,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (sidebar) sidebar.style.display = 'none'
     // Make the footer fixed
     const footer = document.getElementById('footer')
-    if (footer) footer.classList.add('fixed', 'bottom-0', 'w-full')
+    if (footer) footer.classList.add('ml-0', 'bottom-0', 'w-full')
     // Hide Menu Button
     const toggleBtn = document.getElementById('toggleBtn')
     if (toggleBtn) toggleBtn.style.display = 'none'
@@ -82,6 +85,19 @@ function openCamera () {
         videoElement.remove()
         captureButton.remove()
 
+        // Replace "no file chosen" with the image
+        const fileInputLabel = document.querySelector('label[for="fileInput"]')
+        if (fileInputLabel) {
+          const imgPreview = document.createElement('img')
+          imgPreview.src = imageData
+          imgPreview.alt = 'Captured Image'
+          imgPreview.className = 'w-32 h-32 object-cover mt-4'
+          
+          // Clear existing content and append the image
+          fileInputLabel.innerHTML = ''
+          fileInputLabel.appendChild(imgPreview)
+        }
+
         // You can now use the captured image data
         console.log(imageData)
       })
@@ -90,3 +106,14 @@ function openCamera () {
       console.error('Error accessing the camera:', error)
     })
 }
+
+const mainContentWrapper = document.getElementById('mainContentWrapper');
+// if (toggleBtn && sidebar && mainContentWrapper) {
+//   toggleBtn.addEventListener('click', () => {
+//     if (sidebar.classList.contains('-translate-x-full')) {
+//       mainContentWrapper.classList.add('flex', 'flex-1')
+//     } else {
+//       mainContentWrapper.classList.remove('flex', 'flex-1')
+//     }
+//   })
+// }
