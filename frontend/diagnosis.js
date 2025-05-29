@@ -13,6 +13,8 @@ toggleBtn.addEventListener('click', () => {
 closeBtn.addEventListener('click', () => {
   sidebar.classList.add('-translate-x-full')
 })
+
+// Guest Mode Handling
 window.addEventListener('DOMContentLoaded', () => {
   const isGuest = localStorage.getItem('isGuest')
 
@@ -50,9 +52,53 @@ window.addEventListener('DOMContentLoaded', () => {
     const guestContent = document.getElementById('guestContent')
     if (guestContent) guestContent.style.display = 'none'
   }
+  
+  // Setup form submission handler
+  document.getElementById('diagnoseForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const fileInput = document.getElementById('imageInput');
+      if (!fileInput.files[0]) {
+          showMessage('Please select an image first', 'error');
+          return;
+      }
+      
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+      
+      // Show loading state
+      document.getElementById('result').innerHTML = '<p>Analyzing image...</p>';
+      
+      try {
+          const response = await fetch('http://localhost:8080/api/diagnose', {
+              method: 'POST',
+              body: formData
+          });
+          
+          const data = await response.json();
+          
+          if (data.error) {
+              showMessage(data.error, 'error');
+              return;
+          }
+          
+          // Display results
+          displayResults(data);
+          
+          // Save to history if user is logged in
+          if (localStorage.getItem('user')) {
+              saveToHistory(data, fileInput.files[0]);
+          }
+      } catch (error) {
+          showMessage('Error connecting to the server. Please try again.', 'error');
+      }
+  });
 })
 
+// Create Lucide Icons
 lucide.createIcons()
+
+// Camera functionality
 function openCamera () {
   const videoElement = document.createElement('video')
   const canvasElement = document.createElement('canvas')
@@ -107,49 +153,7 @@ function openCamera () {
     })
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Setup form submission handler
-    document.getElementById('diagnoseForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const fileInput = document.getElementById('imageInput');
-        if (!fileInput.files[0]) {
-            showMessage('Please select an image first', 'error');
-            return;
-        }
-        
-        const formData = new FormData();
-        formData.append('file', fileInput.files[0]);
-        
-        // Show loading state
-        document.getElementById('result').innerHTML = '<p>Analyzing image...</p>';
-        
-        try {
-            const response = await fetch('http://localhost:8080/api/diagnose', {
-                method: 'POST',
-                body: formData
-            });
-            
-            const data = await response.json();
-            
-            if (data.error) {
-                showMessage(data.error, 'error');
-                return;
-            }
-            
-            // Display results
-            displayResults(data);
-            
-            // Save to history if user is logged in
-            if (localStorage.getItem('user')) {
-                saveToHistory(data, fileInput.files[0]);
-            }
-        } catch (error) {
-            showMessage('Error connecting to the server. Please try again.', 'error');
-        }
-    });
-});
-
+// Display diagnosis results
 function displayResults(data) {
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = `
@@ -167,17 +171,25 @@ function displayResults(data) {
     `;
 }
 
+// Get disease-specific recommendations
 function getRecommendations(condition) {
     // Map conditions to recommendations
     const recommendations = {
         "Pepper_bell_Bacterial_spot": "<li>Apply copper-based fungicides</li><li>Ensure proper spacing between plants</li><li>Remove infected leaves</li>",
         "Pepper_bell_healthy": "<li>Continue current care practices</li><li>Monitor regularly for signs of disease</li>",
-        // Add more conditions and recommendations
+        "Potato_Early_blight": "<li>Remove infected leaves</li><li>Apply fungicides containing chlorothalonil</li><li>Ensure good air circulation</li>",
+        "Potato_Late_blight": "<li>Remove infected plants immediately</li><li>Apply copper-based fungicides</li><li>Avoid overhead irrigation</li>",
+        "Potato_healthy": "<li>Continue current care practices</li><li>Monitor regularly for signs of disease</li>",
+        "Tomato_Bacterial_spot": "<li>Remove infected leaves</li><li>Apply copper-based bactericides</li><li>Avoid overhead watering</li>",
+        "Tomato_Early_blight": "<li>Remove lower infected leaves</li><li>Apply fungicides</li><li>Mulch around plants</li>",
+        "Tomato_Late_blight": "<li>Remove infected plants immediately</li><li>Apply fungicides</li><li>Improve air circulation</li>",
+        "Tomato_healthy": "<li>Continue current care practices</li><li>Monitor regularly for signs of disease</li>"
     };
     
     return recommendations[condition] || "<li>Consult with a local agricultural expert</li>";
 }
 
+// Show notification messages
 function showMessage(message, type = 'info') {
     const alertDiv = document.createElement('div');
     alertDiv.className = type === 'error' 
@@ -185,7 +197,7 @@ function showMessage(message, type = 'info') {
         : 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative';
     alertDiv.innerHTML = message;
     
-    const container = document.querySelector('.container');
+    const container = document.querySelector('main');
     container.insertBefore(alertDiv, container.firstChild);
     
     setTimeout(() => {
@@ -193,6 +205,7 @@ function showMessage(message, type = 'info') {
     }, 5000);
 }
 
+// Save diagnosis to history
 function saveToHistory(data, imageFile) {
     // Convert image to data URL for storage
     const reader = new FileReader();
