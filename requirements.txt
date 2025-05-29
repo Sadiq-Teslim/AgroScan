@@ -1,0 +1,17 @@
+# Core ML dependencies
+tensorflow==2.15.0
+tensorflowjs==4.13.0
+numpy==1.24.3
+Pillow==10.0.0
+
+# Image processing
+opencv-python==4.8.0.74
+scikit-image==0.21.0
+
+# Utilities
+tqdm==4.65.0
+requests==2.31.0
+matplotlib==3.7.2
+
+# Optional: Model optimization tools
+tensorflow-model-optimization==0.7.5

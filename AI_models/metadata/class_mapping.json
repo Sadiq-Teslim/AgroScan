@@ -1,0 +1,11 @@
+{
+  "Pepper_bell_Bacterial_spot": 0,
+  "Pepper_bell_healthy": 1,
+  "Potato_Early_blight": 2,
+  "Potato_Late_blight": 3,
+  "Potato_healthy": 4,
+  "Tomato_Bacterial_spot": 5,
+  "Tomato_Early_blight": 6,
+  "Tomato_Late_blight": 7,
+  "Tomato_healthy": 8
+}
