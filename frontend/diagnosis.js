@@ -3,8 +3,11 @@ const toggleBtn = document.getElementById('toggleBtn')
 const sidebar = document.getElementById('sidebar')
 const closeBtn = document.getElementById('closeSidebar')
 
+const mainContentWrapper = document.getElementById('mainContentWrapper');
+
 toggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('-translate-x-full')
+  mainContentWrapper.classList.add('flex', 'flex-1')
 })
 
 closeBtn.addEventListener('click', () => {
@@ -19,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (sidebar) sidebar.style.display = 'none'
     // Make the footer fixed
     const footer = document.getElementById('footer')
-    if (footer) footer.classList.add('fixed', 'bottom-0', 'w-full')
+    if (footer) footer.classList.add('ml-0', 'bottom-0', 'w-full')
     // Hide Menu Button
     const toggleBtn = document.getElementById('toggleBtn')
     if (toggleBtn) toggleBtn.style.display = 'none'
@@ -82,6 +85,19 @@ function openCamera () {
         videoElement.remove()
         captureButton.remove()
 
+        // Replace "no file chosen" with the image
+        const fileInputLabel = document.querySelector('label[for="fileInput"]')
+        if (fileInputLabel) {
+          const imgPreview = document.createElement('img')
+          imgPreview.src = imageData
+          imgPreview.alt = 'Captured Image'
+          imgPreview.className = 'w-32 h-32 object-cover mt-4'
+          
+          // Clear existing content and append the image
+          fileInputLabel.innerHTML = ''
+          fileInputLabel.appendChild(imgPreview)
+        }
+
         // You can now use the captured image data
         console.log(imageData)
       })
@@ -89,4 +105,106 @@ function openCamera () {
     .catch(error => {
       console.error('Error accessing the camera:', error)
     })
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup form submission handler
+    document.getElementById('diagnoseForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const fileInput = document.getElementById('imageInput');
+        if (!fileInput.files[0]) {
+            showMessage('Please select an image first', 'error');
+            return;
+        }
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        
+        // Show loading state
+        document.getElementById('result').innerHTML = '<p>Analyzing image...</p>';
+        
+        try {
+            const response = await fetch('http://localhost:8080/api/diagnose', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (data.error) {
+                showMessage(data.error, 'error');
+                return;
+            }
+            
+            // Display results
+            displayResults(data);
+            
+            // Save to history if user is logged in
+            if (localStorage.getItem('user')) {
+                saveToHistory(data, fileInput.files[0]);
+            }
+        } catch (error) {
+            showMessage('Error connecting to the server. Please try again.', 'error');
+        }
+    });
+});
+
+function displayResults(data) {
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-xl font-bold text-green-700">Diagnosis Results</h2>
+            <p class="mt-2"><strong>Identified Condition:</strong> ${data.class.replace(/_/g, ' ')}</p>
+            <p><strong>Confidence:</strong> ${(data.confidence * 100).toFixed(2)}%</p>
+            <div class="mt-4">
+                <h3 class="font-bold">Recommended Actions:</h3>
+                <ul class="list-disc pl-5 mt-2">
+                    ${getRecommendations(data.class)}
+                </ul>
+            </div>
+        </div>
+    `;
+}
+
+function getRecommendations(condition) {
+    // Map conditions to recommendations
+    const recommendations = {
+        "Pepper_bell_Bacterial_spot": "<li>Apply copper-based fungicides</li><li>Ensure proper spacing between plants</li><li>Remove infected leaves</li>",
+        "Pepper_bell_healthy": "<li>Continue current care practices</li><li>Monitor regularly for signs of disease</li>",
+        // Add more conditions and recommendations
+    };
+    
+    return recommendations[condition] || "<li>Consult with a local agricultural expert</li>";
+}
+
+function showMessage(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = type === 'error' 
+        ? 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative' 
+        : 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative';
+    alertDiv.innerHTML = message;
+    
+    const container = document.querySelector('.container');
+    container.insertBefore(alertDiv, container.firstChild);
+    
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 5000);
+}
+
+function saveToHistory(data, imageFile) {
+    // Convert image to data URL for storage
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const history = JSON.parse(localStorage.getItem('diagnosisHistory') || '[]');
+        history.push({
+            date: new Date().toISOString(),
+            class: data.class,
+            confidence: data.confidence,
+            imageUrl: e.target.result
+        });
+        localStorage.setItem('diagnosisHistory', JSON.stringify(history));
+    };
+    reader.readAsDataURL(imageFile);
 }

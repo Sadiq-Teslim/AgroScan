@@ -1,0 +1,22 @@
+{
+  "model_name": "mobilenetv2_finetuned_quantized",
+  "framework": "TensorFlow Lite",
+  "input_shape": [1, 3, 224, 224],
+  "output_shape": [1, 9],
+  "classes": [
+    "Pepper_bell_Bacterial_spot",
+    "Pepper_bell_healthy",
+    "Potato_Early_blight",
+    "Potato_Late_blight",
+    "Potato_healthy",
+    "Tomato_Bacterial_spot",
+    "Tomato_Early_blight",
+    "Tomato_Late_blight",
+    "Tomato_healthy"
+  ],
+  "preprocessing": {
+    "resize": [224, 224],
+    "normalize": [0, 1],
+    "format": "channels_first"
+  }
+}

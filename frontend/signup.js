@@ -13,7 +13,14 @@
 
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim().toLowerCase();
-    const password = document.getElementById("password").value;
+    const password1 = document.getElementById("password1").value;
+    const password2 = document.getElementById("password2").value;
+
+    //Check if passwords match
+    if (password1 !== password2) {
+      alert("❌ Passwords do not match.");
+      return;
+    }
 
     // Check if user already exists
     const exists = users.some(u => u.email === email);
@@ -23,7 +30,7 @@
     }
 
     // Add the new user to the array
-    const newUser = { name, email, password };
+    const newUser = { name, email, password: password1 };
     users.push(newUser);
 
     // Save updated user array to localStorage
@@ -34,4 +41,7 @@
     alert("✅ Account created successfully!");
     window.location.href = "diagnosis.html";
   });
-
+lucide.createIcons()
+function back() {
+  window.location.href = "index.html";
+}
