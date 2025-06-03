@@ -1,3 +1,0 @@
-spring.application.name=AgroScan
-agroscan-account-sid=${TWILIO_ACCOUNT_SID}
-agroscan-auth-token=${TWILIO_AUTH_TOKEN}
